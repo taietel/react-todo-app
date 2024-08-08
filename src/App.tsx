@@ -7,7 +7,7 @@ import useTasksStore from "./hooks/useTasksStore.ts";
 
 function App() {
 
-  const {fetchTasks, tasks, deleteTask, taskToDelete,setTaskToDelete} = useTasksStore();
+  const {fetchTasks, tasks, deleteTask, taskToDelete, setTaskToDelete} = useTasksStore();
 
   useEffect(() => {
     fetchTasks();
@@ -25,10 +25,12 @@ function App() {
           <TasksList tasks={tasks}/>
         </div>
         <div className={'mt-6'}>
-          <TaskForm />
+          <TaskForm/>
         </div>
       </div>
-      <DeleteAlert show={!!taskToDelete} onClose={() => setTaskToDelete(null)} onConfirmAction={() => deleteTask(taskToDelete?.id)} title={'Are you sure you want to delete this?'} description={'You will not be able to recover the item after deletion!'} />
+      <DeleteAlert show={!!taskToDelete} onClose={() => setTaskToDelete(null)}
+                   onConfirmAction={() => deleteTask(taskToDelete?.id)} title={'Are you sure you want to delete this?'}
+                   description={'You will not be able to recover the item after deletion!'}/>
     </div>
   );
 }
