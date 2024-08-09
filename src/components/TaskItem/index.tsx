@@ -1,10 +1,9 @@
-import {ITask} from "../../utils/types.ts";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import useTasksStore from "../../hooks/useTasksStore.ts";
+import { ITask } from '../../utils/types.ts';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import useTasksStore from '../../hooks/useTasksStore';
 
-
-const TaskItem = ({ task }: { task: ITask}) => {
-  const {setTaskToDelete} = useTasksStore();
+const TaskItem = ({ task }: { task: ITask }) => {
+  const { setTaskToDelete } = useTasksStore();
   return (
     <li className="relative py-5 hover:bg-gray-50 dark:hover:bg-slate-800">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -12,7 +11,7 @@ const TaskItem = ({ task }: { task: ITask}) => {
           <div className="flex min-w-0 gap-x-4">
             <div className="min-w-0 flex-auto">
               <p className="text-sm font-semibold leading-6 text-slate-900 dark:text-slate-300">
-                <span className="inset-x-0 -top-px bottom-0"/>
+                <span className="inset-x-0 -top-px bottom-0" />
                 {task.name}
               </p>
               {!!task.description && (

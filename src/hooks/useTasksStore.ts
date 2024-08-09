@@ -1,15 +1,15 @@
-import {create} from 'zustand';
-import {ITask, TaskRequestParams} from "../utils/types.ts";
-import {createTask, deleteTask, fetchTasks} from "../api/tasks.ts";
+import { create } from 'zustand';
+import { ITask, TaskRequestParams } from '../utils/types.ts';
+import { createTask, deleteTask, fetchTasks } from '../api/tasks.ts';
 
 type TasksStore = {
   tasks: ITask[];
-  deleteTask: (id: number|undefined) => void;
+  deleteTask: (id: number | undefined) => void;
   fetchTasks: () => void;
   createTask: (data: TaskRequestParams) => void;
   taskToDelete: ITask | null;
   setTaskToDelete: (task: ITask | null) => void;
-}
+};
 
 const useTasksStore = create<TasksStore>((set) => ({
   tasks: [],
@@ -20,7 +20,7 @@ const useTasksStore = create<TasksStore>((set) => ({
     }
     await deleteTask(id);
     set((state: TasksStore) => ({
-      tasks: state.tasks.filter((task: ITask) => task.id !== id)
+      tasks: state.tasks.filter((task: ITask) => task.id !== id),
     }));
   },
   fetchTasks: async () => {
@@ -30,12 +30,12 @@ const useTasksStore = create<TasksStore>((set) => ({
   createTask: async (data: TaskRequestParams) => {
     const newTask = await createTask(data);
     set((state) => ({
-      tasks: [...state.tasks, newTask.data]
+      tasks: [...state.tasks, newTask.data],
     }));
   },
   setTaskToDelete: (task: ITask | null) => {
     set({ taskToDelete: task });
-  }
+  },
 }));
 
 export default useTasksStore;

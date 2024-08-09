@@ -2,12 +2,12 @@ import { Fragment, PropsWithChildren } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 export default function Modal({
-                                children,
-                                show = false,
-                                maxWidth = '2xl',
-                                closeable = true,
-                                onClose = () => {},
-                              }: PropsWithChildren<{
+  children,
+  show = false,
+  maxWidth = '2xl',
+  closeable = true,
+  onClose = () => {},
+}: PropsWithChildren<{
   show: boolean;
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   closeable?: boolean;
