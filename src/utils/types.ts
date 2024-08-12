@@ -11,4 +11,7 @@ export interface TaskRequestParams {
   completed?: boolean;
 }
 
-
+export interface AuthRequestParams {
+  email: string;
+  password: string;
+}

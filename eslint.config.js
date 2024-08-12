@@ -13,7 +13,7 @@ export default [
       '@stylistic/js': stylisticJs,
     },
     rules: {
-      // "@stylistic/js/jsx-quotes": ["error", "prefer-single"],
+      // '@stylistic/js/jsx-quotes': ['error', 'prefer-single'],
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },

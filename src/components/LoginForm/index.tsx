@@ -10,21 +10,19 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
-import { createTask, fetchTasks } from '../../api/tasks.ts';
-import { TaskRequestParams } from '../../utils/types.ts';
-import { getActions } from '../../store/app-store.ts';
+import { login } from '../../api/auth';
+import { AuthRequestParams } from '../../utils/types.ts';
 
-const TaskForm = () => {
+const LoginForm = () => {
   const formSchema = z.object({
-    name: z.string().min(1, { message: 'Task name is required' }),
-    description: z.string(),
+    email: z.string().email({ message: 'Invalid email address' }),
+    password: z.string().min(1, { message: 'Password is required' }),
   });
 
   const initialValues = {
-    name: '',
-    description: '',
+    email: '',
+    password: '',
   };
 
   const form = useForm({
@@ -32,29 +30,25 @@ const TaskForm = () => {
     defaultValues: initialValues,
   });
 
-  const { setTasks } = getActions();
+  const handleLogin = async (values: AuthRequestParams) => {
+    login(values)
+      .then((res) => {})
 
-  const submitTask = (values: TaskRequestParams) => {
-    createTask(values).then((res) => {
-      if (res.status === 201) {
-        fetchTasks().then((res) => {
-          setTasks(res.data);
-        });
-      }
-    });
-    form.reset();
+      .catch((res) => {
+        form.setError('email', { message: res.response.data.message });
+      });
   };
 
   return (
-    <div className={'w-full'}>
+    <div className={'w-1/2 justify-center mx-auto mt-12'}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitTask)}>
+        <form onSubmit={form.handleSubmit(handleLogin)}>
           <FormField
             control={form.control}
-            name={'name'}
+            name={'email'}
             render={({ field }) => (
               <FormItem className={''}>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -65,12 +59,12 @@ const TaskForm = () => {
 
           <FormField
             control={form.control}
-            name={'description'}
+            name={'password'}
             render={({ field }) => (
               <FormItem className={''}>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Input {...field} type={'password'} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -87,4 +81,4 @@ const TaskForm = () => {
   );
 };
 
-export default TaskForm;
+export default LoginForm;

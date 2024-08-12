@@ -1,5 +1,5 @@
 import axiosClient from './axiosClient';
-import { TaskRequestParams } from '../utils/types.ts';
+import { TaskRequestParams } from '../utils/types';
 
 export const fetchTasks = async () => {
   return await axiosClient.get('/todos');
