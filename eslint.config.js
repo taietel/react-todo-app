@@ -12,6 +12,7 @@ export default [
     plugins: {
       '@stylistic/js': stylisticJs,
     },
+    extends: ['plugin:react/jsx-runtime'],
     rules: {
       // '@stylistic/js/jsx-quotes': ['error', 'prefer-single'],
       'react/react-in-jsx-scope': 'off',
